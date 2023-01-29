@@ -8,7 +8,9 @@ class PostController {
   }
 
   async getPosts(req, res) {
-
+    const posts = await db.query('SELECT * FROM post');
+    // res.json(posts.rows.sort((a, b) => a.id - b.id))
+    res.json(posts.rows)
   }
 }
 
