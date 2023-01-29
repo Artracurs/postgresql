@@ -11,7 +11,8 @@ class UserController {
 
   async getUsers(req, res) {
     const users = await db.query('SELECT * FROM person');
-    res.json(users.rows);
+    // res.json(users.rows.sort((a, b) => a.id - b.id))
+    res.json(users.rows)
   }
 
   async getOneUser(req, res) {
@@ -24,11 +25,17 @@ class UserController {
   async updateUser(req, res) {
     const {id, name, surname} = req.body
     const user = await db.query('UPDATE person set name = $1, surname = $2 where id = $3 RETURNING *', [name, surname, id])
-    console.log(user.rows);
-    res.json(user.rows)
+    console.log(user.rows[0]);
+    res.json(user.rows[0])
   }
 
   async deleteUser(req, res) {
+    const id = req.params.id;
+    await db.query('DELETE FROM person where id = $1', [id])
+    
+    const users = await db.query('SELECT * FROM person');
+    console.log(users.rows);
+    res.json(users.rows)
 
   }
 }
