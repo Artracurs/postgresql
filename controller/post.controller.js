@@ -11,6 +11,18 @@ class PostController {
     const posts = await db.query('SELECT * FROM post');
     res.json(posts.rows);
   }
+
+  async deletePost(req, res) {
+    try {
+      const id = req.params.id;
+      await db.query('DELETE FROM post where id = $1', [id])
+      console.log(id);
+      const users = await db.query('SELECT * FROM post');
+      res.json(users.rows)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 module.exports = new PostController()

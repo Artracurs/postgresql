@@ -22,7 +22,7 @@ class UserController {
 
   }
   async updateUser(req, res) {
-    const {id, name, surname} = req.body
+    const { id, name, surname } = req.body
     const user = await db.query('UPDATE person set name = $1, surname = $2 where id = $3 RETURNING *', [name, surname, id])
     console.log(user.rows[0]);
     res.json(user.rows[0])
@@ -31,7 +31,7 @@ class UserController {
   async deleteUser(req, res) {
     const id = req.params.id;
     await db.query('DELETE FROM person where id = $1', [id])
-    
+
     const users = await db.query('SELECT * FROM person');
     console.log(users.rows);
     res.json(users.rows)
