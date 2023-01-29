@@ -3,20 +3,15 @@
 1. yarn install
 2. yarn dev
 
+---
 ## User ##
-
-- [x] ~~Create user~~
-- [x] ~~Delete user~~
-- [x] ~~Get user by id~~
-- [x] ~~Get all users~~
-- [x] ~~Change user name~~
 
 ### Create User ###
 POST http://localhost:8080/api/user
 ```
 {
 	"name": "Your name",
-	"surname": "Your sername"
+	"surname": "Your surname"
 }
 ```
 response
@@ -24,18 +19,18 @@ response
 [{
     "id": 1,
     "name": "Your name",
-    "surname": "Your sername"
+    "surname": "Your surname"
   },
   {
     "id": 2,
     "name": "Your name",
-    "surname": "Your sername"
+    "surname": "Your surname"
 }]
 ```
-### Delete User ###
 
 ### Get user by id ###
 GET http://localhost:8080/api/user/10
+
 response
 ```
 {
@@ -45,8 +40,28 @@ response
 }
 ```
 
+### Update User ###
+PUT http://localhost:8080/api/user
+```
+{
+  "id": 2,
+  "name": "New name",
+  "surname": "New surname"
+}
+```
+response
+```
+{
+  "id": 2,
+  "name": "New name",
+  "surname": "New surname"
+}
+```
+
+### Delete User ###
+---
 ## Post ##
-### Create User ###
+### Create Post ###
 
 **get all posts** GET http://localhost:8080/api/post 
 **get all posts by user id** GET http://localhost:8080/api/post?id=1
