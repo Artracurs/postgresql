@@ -1,6 +1,5 @@
 const db = require('../db')
 
-
 class UserController {
   async createUSer(req, res) {
     const { name, surname } = req.body
