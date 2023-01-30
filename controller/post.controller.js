@@ -1,9 +1,10 @@
 const db = require('../db')
 
 class PostController {
-  async cretePost(req, res) {
-    const { title, content } = req.body;
-    const newPost = await db.query('INSERT INTO post (title, content) values ($1, $2) RETURNING *', [title, content]);
+  async createPost(req, res) {
+    const { title, content, user_id } = req.body;
+    const newPost = await db.query('INSERT INTO post (title, content, user_id) values ($1, $2, $3) RETURNING *', [title, content, user_id]);
+    // console.log(req.body);
     res.json(newPost.rows[0]);
   }
 
@@ -12,16 +13,12 @@ class PostController {
     res.json(posts.rows);
   }
 
-  async deletePost(req, res) {
-    try {
-      const id = req.params.id;
-      await db.query('DELETE FROM post where id = $1', [id])
-      console.log(id);
-      const users = await db.query('SELECT * FROM post');
-      res.json(users.rows)
-    } catch (error) {
-      console.log(error);
-    }
+  async getPostsByUser(req, res) {
+    const id = req.query.id;
+    console.log(id);
+    const posts = await db.query('select * from post where user_id = $1', [id])
+    console.log('getPostsByUser');
+    res.json(posts.rows);
   }
 }
 
