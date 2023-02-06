@@ -35,7 +35,6 @@ class UserController {
     const users = await db.query('SELECT * FROM person');
     console.log(users.rows);
     res.json(users.rows)
-
   }
 }
 
